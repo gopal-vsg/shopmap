@@ -22,7 +22,7 @@
 
 <main>
   <div>
-    <p class="m-10 text-2xl">Shop Details</p>
+    <p class="m-4 text-2xl">Shop Details</p>
   </div>
   <div class="overflow-x-auto">
     <table class="table table-zebra w-full">

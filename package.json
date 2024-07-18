@@ -17,5 +17,9 @@
     "tslib": "^2.6.3",
     "typescript": "^5.2.2",
     "vite": "^5.3.4"
+  },
+  "dependencies": {
+    "@types/leaflet": "^1.9.12",
+    "leaflet": "^1.9.4"
   }
 }
