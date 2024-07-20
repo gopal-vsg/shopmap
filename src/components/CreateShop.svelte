@@ -48,7 +48,7 @@
   </script>
   
   <main class="flex flex-col items-center justify-center bg-gray-100 p-4">
-    <p>hello world</p>
+    <h1 class="text-2xl font-bold mb-4">Add shop Details</h1>
   
     <div class="space-y-4">
       <input type="text" placeholder="Name" bind:value={name} class="w-full p-2 border border-gray-300 rounded" />
