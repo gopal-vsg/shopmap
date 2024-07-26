@@ -2,6 +2,7 @@
   import { supabase } from "../lib/supabase";
   import { onMount } from "svelte";
 
+  
   let data = [];
   async function fetchShops() {
     const { data: fetchedShops, error } = await supabase
