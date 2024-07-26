@@ -35,6 +35,7 @@
 <main class="min-h-screen bg-gray-100">
   {#if user}
     <nav class="bg-blue-500 p-4 shadow-md sp flex justify-between items-center">
+      <!-- svelte-ignore a11y-missing-attribute -->
       <a class="text-white text-2xl font-bold">Shop Map</a>
       <div class="flex space-x-4">
         <button class="btn" onclick="PlaceOrder.showModal()">Add shop</button>
