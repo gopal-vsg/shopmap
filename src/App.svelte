@@ -34,15 +34,17 @@
 
 <main class="min-h-screen bg-gray-100">
   {#if user}
-    <nav class="bg-blue-500 p-4 shadow-md sp flex justify-between items-center">
+  <nav class="bg-blue-500 p-4 shadow-md">
+    <div class="container mx-auto flex flex-wrap justify-between items-center">
       <!-- svelte-ignore a11y-missing-attribute -->
-      <a class="text-white text-2xl font-bold">Shop Map</a>
-      <div class="flex space-x-4">
-        <button class="btn" onclick="PlaceOrder.showModal()">Add shop</button>
-        <button class="btn" onclick="PlaceShop.showModal()">Place order</button>
-        <button class="btn" on:click={signOut}>Logout</button>
+      <a class="text-white text-2xl font-bold mb-2 md:mb-0 w-full md:w-auto text-center md:text-left">Shop Map</a>
+      <div class="flex flex-wrap justify-center md:justify-end w-full md:w-auto space-y-2 md:space-y-0 md:space-x-2">
+        <button class="btn w-full sm:w-auto" onclick="PlaceOrder.showModal()">New shop</button>
+        <button class="btn w-full sm:w-auto" onclick="PlaceShop.showModal()">Place order</button>
+        <button class="btn w-full sm:w-auto" on:click={signOut}>Logout</button>
       </div>
-    </nav>
+    </div>
+  </nav>
 
     <Leaflet />
     
