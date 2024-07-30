@@ -12,9 +12,10 @@
   });
 
   let map;
+  let markers = {};
 
   const fetchCoordinates = async () => {
-    const { data, error } = await supabase.from("shops").select("lat, lng");
+    const { data, error } = await supabase.from("shops").select("name,owner,phone,lat,lng");
     if (error) {
       console.error("Error getting the coordinates", error);
       return [];
@@ -34,13 +35,19 @@
     }).addTo(map);
 
     points.forEach((point) => {
-      L.marker([point.lat, point.lng], { icon: customIcon }).addTo(map);
+      const marker = L.marker([point.lat, point.lng], { icon: customIcon }).addTo(map);
+      marker.bindPopup(`<b>${point.name}</b><br>Owner: ${point.owner}<br>Phone: ${point.phone}`);
+      markers[`${point.lat},${point.lng}`] = marker;
     });
   };
 
   export function centerMap(lat, lng) {
     if (map) {
       map.setView([lat, lng], 17);
+      const marker = markers[`${lat},${lng}`];
+      if (marker) {
+        marker.openPopup();
+      }
     }
   }
 
