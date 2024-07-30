@@ -42,6 +42,7 @@
         message = "Order placed successfully!";
         items = "";
         selectedShopId = null;
+        location.reload();
       }
       myModal1.showModal();
     }

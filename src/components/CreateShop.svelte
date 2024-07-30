@@ -37,6 +37,7 @@
           address = "";
           lat = "";
           lng = "";
+          location.reload();
         }
       } else {
         messageType = "error";
