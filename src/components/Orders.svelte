@@ -1,6 +1,6 @@
 <script>
   import { supabase } from "../lib/supabase";
-  import { onMount } from "svelte";
+  import { onMount , createEventDispatcher } from "svelte";
 
   let orders = [];
 
@@ -15,6 +15,7 @@
       orders = fetchedOrders;
     }
   }
+
   onMount(() => {
     fetchOrders();
   });

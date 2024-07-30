@@ -3,12 +3,14 @@
   import { onMount } from "svelte";
   import L from "leaflet";
   import "leaflet/dist/leaflet.css";
+
   const customIcon = L.icon({
-    iconUrl: "/src/assets/map-marker.png", // Corrected path
+    iconUrl: "/src/assets/map-marker.png",
     iconSize: [30, 30],
     iconAnchor: [15, 30],
     popupAnchor: [0, -30],
   });
+
   let map;
 
   const fetchCoordinates = async () => {
@@ -35,6 +37,12 @@
       L.marker([point.lat, point.lng], { icon: customIcon }).addTo(map);
     });
   };
+
+  export function centerMap(lat, lng) {
+    if (map) {
+      map.setView([lat, lng], 17);
+    }
+  }
 
   onMount(() => {
     initializeMap();

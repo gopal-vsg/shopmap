@@ -1,7 +1,8 @@
 <script>
   import { supabase } from "../lib/supabase";
-  import { onMount } from "svelte";
+  import { onMount, createEventDispatcher } from "svelte";
 
+  const dispatch = createEventDispatcher();
   
   let data = [];
   async function fetchShops() {
@@ -16,6 +17,11 @@
       data = fetchedShops;
     }
   }
+
+  function handleRowClick(lat, lng) {
+    dispatch('shopSelected', { lat, lng });
+  }
+
   onMount(() => {
     fetchShops();
   });
@@ -37,7 +43,7 @@
       </thead>
       <tbody>
         {#each data as row}
-          <tr>
+          <tr on:click={() => handleRowClick(row.lat, row.lng)} class=" cursor-pointer">
             <td>{row.name}</td>
             <td>{row.owner}</td>
             <td>{row.phone}</td>
