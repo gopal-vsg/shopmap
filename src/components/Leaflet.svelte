@@ -19,10 +19,9 @@
     if (error) {
       console.error("Error getting the coordinates", error);
       return [];
-    } else {
-      console.log("Coordinates fetched successfully");
-      return data;
     }
+    console.log("Coordinates fetched successfully");
+    return data;
   };
 
   const initializeMap = async () => {
@@ -58,11 +57,11 @@
 
 <div class="flex flex-col items-center">
   <p class="m-4 text-3xl font-semibold">Shop Map</p>
-  <div id="map" class="size-4/6"></div>
+  <div id="map" class="w-4/6 h-96"></div>
 </div>
 
 <style>
   #map {
-    height: 400px;
+    height: 400px; /* Set a fixed height for the map */
   }
 </style>

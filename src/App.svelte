@@ -1,4 +1,3 @@
-<!--App.svelte-->
 <script lang="ts">
   import Shops from "./components/Shops.svelte";
   import Orders from "./components/Orders.svelte";
@@ -10,21 +9,20 @@
   import { supabase } from "./lib/supabase";
   let selectedOption = "shops";
   let user = null;
-
   let shopMap;
 
-  function onShopSelected(event) {
+  const onShopSelected = (event) => {
     const { lat, lng } = event.detail;
     if (shopMap) {
       shopMap.centerMap(lat, lng);
     }
-  }
+  };
 
   onMount(async () => {
     const {
-      data: { user: currentuser },
+      data: { user: currentUser },
     } = await supabase.auth.getUser();
-    user = currentuser;
+    user = currentUser;
     if (!user) {
       const loginDialog = document.getElementById(
         "loginDialog"
@@ -33,7 +31,7 @@
     }
   });
 
-  async function signOut() {
+  const signOut = async () => {
     await supabase.auth.signOut();
     user = null;
     const loginDialog = document.getElementById(
@@ -41,11 +39,7 @@
     ) as HTMLDialogElement;
     location.reload();
     loginDialog.showModal();
-  }
-  function handleShopSelected(event) {
-    const { lat, lng } = event.detail;
-    Leaflet.centerMap(lat, lng);
-  }
+  };
 </script>
 
 <main class="min-h-screen bg-gray-100">
@@ -54,7 +48,6 @@
       <div
         class="container mx-auto flex flex-wrap justify-between items-center"
       >
-        <!-- svelte-ignore a11y-missing-attribute -->
         <a
           class="text-white text-2xl font-bold mb-2 md:mb-0 w-full md:w-auto text-center md:text-left"
           >Shop Map</a
@@ -62,10 +55,14 @@
         <div
           class="flex flex-wrap justify-center md:justify-end w-full md:w-auto space-y-2 md:space-y-0 md:space-x-2"
         >
-          <button class="btn w-full sm:w-auto" onclick="PlaceOrder.showModal()"
+          <button
+            class="btn w-full sm:w-auto"
+            on:click={() => document.getElementById("PlaceOrder").showModal()}
             >New shop</button
           >
-          <button class="btn w-full sm:w-auto" onclick="PlaceShop.showModal()"
+          <button
+            class="btn w-full sm:w-auto"
+            on:click={() => document.getElementById("PlaceShop").showModal()}
             >Place order</button
           >
           <button class="btn w-full sm:w-auto" on:click={signOut}>Logout</button
