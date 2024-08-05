@@ -67,7 +67,7 @@
 </script>
 
 <main class="p-4 max-w-md mx-auto">
-  <h1 class="text-2xl font-bold mb-4">Place your order</h1>
+  <h1 class="text-2xl font-bold mb-4">Create order</h1>
 
   <div class="mb-4">
     <label for="shop-select" class="block mb-2">Select a shop:</label>

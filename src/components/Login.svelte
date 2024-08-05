@@ -21,6 +21,7 @@
   </script>
   
   <main class="flex flex-col items-center justify-center min-h-screen ">
+    <img src="/login_logo.png" alt="" class=" -mt-44">
     <div class="card w-96 bg-base-100 shadow-xl">
       <div class="card-body">
         <h2 class="card-title text-2xl font-bold mb-6 text-center">Login</h2>
