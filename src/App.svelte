@@ -63,7 +63,7 @@
           <button
             class="btn w-full sm:w-auto"
             on:click={() => document.getElementById("PlaceShop").showModal()}
-            >Place order</button
+            >Create order</button
           >
           <button class="btn w-full sm:w-auto" on:click={signOut}>Logout</button
           >
