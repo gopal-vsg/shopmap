@@ -14,8 +14,9 @@
         errormessage = error.message;
       } else {
         const loginDialog = document.getElementById("loginDialog") as HTMLDialogElement;
-        loginDialog.close();
         location.reload();
+        loginDialog.close();
+        
       }
     }
   </script>

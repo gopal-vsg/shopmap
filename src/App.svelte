@@ -7,9 +7,13 @@
   import Login from "./components/Login.svelte";
   import { onMount } from "svelte";
   import { supabase } from "./lib/supabase";
+
   let selectedOption = "shops";
   let user = null;
   let shopMap;
+  let loginDialog: HTMLDialogElement;
+  let placeShopDialog: HTMLDialogElement;
+  let placeOrderDialog: HTMLDialogElement;
 
   const onShopSelected = (event) => {
     const { lat, lng } = event.detail;
@@ -24,9 +28,6 @@
     } = await supabase.auth.getUser();
     user = currentUser;
     if (!user) {
-      const loginDialog = document.getElementById(
-        "loginDialog"
-      ) as HTMLDialogElement;
       loginDialog.showModal();
     }
   });
@@ -34,9 +35,6 @@
   const signOut = async () => {
     await supabase.auth.signOut();
     user = null;
-    const loginDialog = document.getElementById(
-      "loginDialog"
-    ) as HTMLDialogElement;
     location.reload();
     loginDialog.showModal();
   };
@@ -45,28 +43,12 @@
 <main class="min-h-screen bg-gray-100">
   {#if user}
     <nav class="bg-blue-500 p-4 shadow-md">
-      <div
-        class="container mx-auto flex flex-wrap justify-between items-center"
-      >
-        <a
-          class="text-white text-2xl font-bold mb-2 md:mb-0 w-full md:w-auto text-center md:text-left"
-          >Shop Map</a
-        >
-        <div
-          class="flex flex-wrap justify-center md:justify-end w-full md:w-auto space-y-2 md:space-y-0 md:space-x-2"
-        >
-          <button
-            class="btn w-full sm:w-auto"
-            on:click={() => document.getElementById("PlaceOrder").showModal()}
-            >New shop</button
-          >
-          <button
-            class="btn w-full sm:w-auto"
-            on:click={() => document.getElementById("PlaceShop").showModal()}
-            >Create order</button
-          >
-          <button class="btn w-full sm:w-auto" on:click={signOut}>Logout</button
-          >
+      <div class="container mx-auto flex flex-wrap justify-between items-center">
+        <a class="text-white text-2xl font-bold mb-2 md:mb-0 w-full md:w-auto text-center md:text-left">Shop Map</a>
+        <div class="flex flex-wrap justify-center md:justify-end w-full md:w-auto space-y-2 md:space-y-0 md:space-x-2">
+          <button class="btn w-full sm:w-auto" on:click={() => placeOrderDialog.showModal()}>New shop</button>
+          <button class="btn w-full sm:w-auto" on:click={() => placeShopDialog.showModal()}>Create order</button>
+          <button class="btn w-full sm:w-auto" on:click={signOut}>Logout</button>
         </div>
       </div>
     </nav>
@@ -93,12 +75,10 @@
       </div>
     </div>
 
-    <dialog id="PlaceShop" class="modal">
+    <dialog bind:this={placeShopDialog} class="modal">
       <div class="modal-box">
         <form method="dialog">
-          <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-            >✕</button
-          >
+          <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
         </form>
         <PlaceOrder />
       </div>
@@ -107,12 +87,10 @@
       </form>
     </dialog>
 
-    <dialog id="PlaceOrder" class="modal">
+    <dialog bind:this={placeOrderDialog} class="modal">
       <div class="modal-box">
         <form method="dialog">
-          <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-            >✕</button
-          >
+          <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
         </form>
         <CreateShop />
       </div>
@@ -121,7 +99,7 @@
       </form>
     </dialog>
   {:else}
-    <dialog id="loginDialog" class="modal">
+    <dialog bind:this={loginDialog} class="modal">
       <div>
         <Login />
       </div>
