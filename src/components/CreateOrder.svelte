@@ -19,7 +19,7 @@
     }
   });
 
-  async function placeOrder() {
+  async function createOrder() {
     if (!selectedShopId || !items) {
       message = "Please select a shop and enter items.";
       showModal();
@@ -45,9 +45,9 @@
 
     if (error) {
       console.error("Error placing order:", error);
-      message = "Failed to place order. Please try again.";
+      message = "Failed to create order. Please try again.";
     } else {
-      message = "Order placed successfully!";
+      message = "Order created successfully!";
       items = "";
       selectedShopId = "";
       periodic = false;
@@ -108,8 +108,8 @@
   </div>
   {/if}
 
-  <button class="p-3 rounded-md w-full bg-purple-500 text-white" on:click={placeOrder}>
-    Place Order
+  <button class="p-3 rounded-md w-full bg-purple-500 text-white" on:click={createOrder}>
+    Create Order
   </button>
   <dialog bind:this={myModal1} class="modal">
     <div class="modal-box">

@@ -2,7 +2,7 @@
   import Shops from "./components/Shops.svelte";
   import Orders from "./components/Orders.svelte";
   import Leaflet from "./components/Leaflet.svelte";
-  import PlaceOrder from "./components/PlaceOrder.svelte";
+  import CreateOrder from "./components/CreateOrder.svelte";
   import CreateShop from "./components/CreateShop.svelte";
   import Login from "./components/Login.svelte";
   import { onMount } from "svelte";
@@ -12,8 +12,8 @@
   let user = null;
   let shopMap;
   let loginDialog: HTMLDialogElement;
-  let placeShopDialog: HTMLDialogElement;
-  let placeOrderDialog: HTMLDialogElement;
+  let createShopDialog: HTMLDialogElement;
+  let createOrderDialog: HTMLDialogElement;
 
   const onShopSelected = (event) => {
     const { lat, lng } = event.detail;
@@ -44,10 +44,11 @@
   {#if user}
     <nav class="bg-blue-500 p-4 shadow-md">
       <div class="container mx-auto flex flex-wrap justify-between items-center">
+        <!-- svelte-ignore a11y-missing-attribute -->
         <a class="text-white text-2xl font-bold mb-2 md:mb-0 w-full md:w-auto text-center md:text-left">Shop Map</a>
         <div class="flex flex-wrap justify-center md:justify-end w-full md:w-auto space-y-2 md:space-y-0 md:space-x-2">
-          <button class="btn w-full sm:w-auto" on:click={() => placeOrderDialog.showModal()}>New shop</button>
-          <button class="btn w-full sm:w-auto" on:click={() => placeShopDialog.showModal()}>Create order</button>
+          <button class="btn w-full sm:w-auto" on:click={() => createOrderDialog.showModal()}>New shop</button>
+          <button class="btn w-full sm:w-auto" on:click={() => createShopDialog.showModal()}>Create order</button>
           <button class="btn w-full sm:w-auto" on:click={signOut}>Logout</button>
         </div>
       </div>
@@ -75,19 +76,19 @@
       </div>
     </div>
 
-    <dialog bind:this={placeShopDialog} class="modal">
+    <dialog bind:this={createShopDialog} class="modal">
       <div class="modal-box">
         <form method="dialog">
           <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
         </form>
-        <PlaceOrder />
+        <CreateOrder />
       </div>
       <form method="dialog" class="modal-backdrop">
         <button>close</button>
       </form>
     </dialog>
 
-    <dialog bind:this={placeOrderDialog} class="modal">
+    <dialog bind:this={createOrderDialog} class="modal">
       <div class="modal-box">
         <form method="dialog">
           <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
