@@ -54,24 +54,36 @@
       </div>
     </nav>
 
-    <Leaflet bind:this={shopMap} />
-
-    <div class="container mx-auto mt-8">
-      <div class="w-3/4 mx-auto">
-        <select
-          bind:value={selectedOption}
-          class="w-24 p-2 mb-4 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-        >
-          <option value="shops">Shops</option>
-          <option value="orders">Orders</option>
-        </select>
-
-        <div class="bg-white rounded-lg shadow-md p-6">
-          {#if selectedOption === "shops"}
-            <Shops on:shopSelected={onShopSelected} />
-          {:else}
-            <Orders />
-          {/if}
+    <div class="container mx-auto p-4">
+      <div class="flex flex-col md:flex-row gap-4">
+        <div class="w-full md:w-2/5">
+          <div class="bg-white rounded-lg shadow-md p-6">
+            <div class="mb-4">
+              <label for="view-select" class="block text-sm font-medium text-gray-700 mb-2">Select View:</label>
+              <select
+                id="view-select"
+                bind:value={selectedOption}
+                class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+              >
+                <option value="shops">Shops</option>
+                <option value="orders">Orders</option>
+              </select>
+            </div>
+    
+            <div class="overflow-auto max-h-[calc(100vh-200px)]">
+              {#if selectedOption === "shops"}
+                <Shops on:shopSelected={onShopSelected} />
+              {:else}
+                <Orders />
+              {/if}
+            </div>
+          </div>
+        </div>
+    
+        <div class="w-full md:w-3/5">
+          <div class="bg-white rounded-lg shadow-md p-6 h-full">
+            <Leaflet bind:this={shopMap} />
+          </div>
         </div>
       </div>
     </div>
