@@ -45,9 +45,9 @@
     <nav class="bg-blue-500 p-4 shadow-md">
       <div class="container mx-auto flex flex-wrap justify-between items-center">
         <!-- svelte-ignore a11y-missing-attribute -->
-        <a class="text-white text-2xl font-bold mb-2 md:mb-0 w-full md:w-auto text-center md:text-left">Shop Map</a>
+        <a class="text-white text-2xl font-bold mb-2 md:mb-0 w-full md:w-auto text-center md:text-left">Shop Map </a>
         <div class="flex flex-wrap justify-center md:justify-end w-full md:w-auto space-y-2 md:space-y-0 md:space-x-2">
-          <button class="btn w-full sm:w-auto" on:click={() => createOrderDialog.showModal()}>New shop</button>
+          <button class="btn w-full sm:w-auto" on:click={() => createOrderDialog.showModal()}>Add Retailer</button>
           <button class="btn w-full sm:w-auto" on:click={() => createShopDialog.showModal()}>Create order</button>
           <button class="btn w-full sm:w-auto" on:click={signOut}>Logout</button>
         </div>
@@ -65,7 +65,7 @@
                 bind:value={selectedOption}
                 class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
               >
-                <option value="shops">Shops</option>
+                <option value="shops">Retailers</option>
                 <option value="orders">Orders</option>
               </select>
             </div>

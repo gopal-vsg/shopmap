@@ -11,7 +11,7 @@
   let myModal1;
 
   onMount(async () => {
-    const { data, error } = await supabase.from("shops").select("id, name");
+    const { data, error } = await supabase.from("retailers").select("id, name");
     if (error) {
       console.error("Error getting details of shops:", error);
     } else {
@@ -70,13 +70,13 @@
   <h1 class="text-2xl font-bold mb-4">Create order</h1>
 
   <div class="mb-4">
-    <label for="shop-select" class="block mb-2">Select a shop:</label>
+    <label for="shop-select" class="block mb-2">Select a Retailer:</label>
     <select
       id="shop-select"
       class="select select-bordered w-full"
       bind:value={selectedShopId}
     >
-      <option value="">Choose a shop</option>
+      <option value="">Choose a Retailer</option>
       {#each shops as shop}
         <option value={shop.id}>{shop.name}</option>
       {/each}

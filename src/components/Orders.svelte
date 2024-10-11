@@ -9,7 +9,7 @@
   async function fetchOrders() {
     const { data: fetchedOrders, error } = await supabase
       .from("orders")
-      .select("*, shop:shops(name)");
+      .select("*, shop:retailers(name)");
     if (error) {
       console.error("Failed to fetch orders", error);
     } else {

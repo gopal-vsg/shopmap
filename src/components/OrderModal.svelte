@@ -36,7 +36,7 @@
       // Update the shop name if it has changed
       if (editedOrder.shop_name !== order.shop?.name) {
         const { data: shopData, error: shopError } = await supabase
-          .from("shops")
+          .from("retailers")
           .update({ name: editedOrder.shop_name })
           .eq("id", order.shop?.id);
 

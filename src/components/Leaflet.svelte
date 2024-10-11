@@ -15,7 +15,7 @@
   let markers = {};
 
   const fetchCoordinates = async () => {
-    const { data, error } = await supabase.from("shops").select("name,owner,phone,lat,lng");
+    const { data, error } = await supabase.from("retailers").select("name,owner,phone,lat,lng");
     if (error) {
       console.error("Error getting the coordinates", error);
       return [];
