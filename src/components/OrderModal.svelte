@@ -21,6 +21,7 @@
       Last_Delivery_date: editedOrder.Last_Delivery_date,
       Periodic: editedOrder.Periodic,
       Period: editedOrder.Period,
+      order_value: editedOrder.order_value,  // Added order value
     };
 
     const { data, error } = await supabase
@@ -108,6 +109,16 @@
         />
 
         <label class="label">
+          <span class="label-text">Order Value (₹)</span>
+        </label>
+        <input
+          type="number"
+          bind:value={editedOrder.order_value}
+          class="input input-bordered"
+          min="0"
+        />
+
+        <label class="label">
           <span class="label-text">Order Date</span>
         </label>
         <input
@@ -153,6 +164,10 @@
           <p class="text-gray-700">
             <span class="font-medium">Items:</span>
             {order.items}
+          </p>
+          <p class="text-gray-700">
+            <span class="font-medium">Order Value:</span>
+            ₹{order.order_value?.toLocaleString() || "0"}
           </p>
           <p class="text-gray-700">
             <span class="font-medium">Order Date:</span>

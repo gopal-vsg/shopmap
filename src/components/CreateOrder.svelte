@@ -7,6 +7,7 @@
   let items = "";
   let periodic = false;
   let period = 0;
+  let orderValue = 0;
   let message = "";
   let myModal1;
 
@@ -32,13 +33,19 @@
       return;
     }
 
+    if (orderValue <= 0) {
+      message = "Please enter a valid order value.";
+      showModal();
+      return;
+    }
+
     const order = {
       shop_id: selectedShopId,
       items: items,
       order_date: new Date().toISOString(),
       Periodic: periodic,
       Period: periodic ? period : null,
-      // Do not include Last_Delivery_date in the order creation
+      order_value: orderValue,
     };
 
     const { error } = await supabase.from("orders").insert([order]);
@@ -52,9 +59,8 @@
       selectedShopId = "";
       periodic = false;
       period = 0;
-      // Use `location.reload()` cautiously as it reloads the entire page
-      // Consider updating the UI without reloading if possible
-      location.reload(); 
+      orderValue = 0;
+      location.reload();
     }
     showModal();
   }
@@ -67,7 +73,7 @@
 </script>
 
 <main class="p-4 max-w-md mx-auto">
-  <h1 class="text-2xl font-bold mb-4">Create order</h1>
+  <h1 class="text-2xl font-bold mb-4">Create Order</h1>
 
   <div class="mb-4">
     <label for="shop-select" class="block mb-2">Select a Retailer:</label>
@@ -88,29 +94,47 @@
     <textarea
       id="items-input"
       class="border p-2 w-full"
-      placeholder="Enter items"
+      placeholder="Enter items separated by commas"
       bind:value={items}
     ></textarea>
   </div>
+
   <div class="mb-4 flex items-center">
     <label for="periodic" class="mr-2">Periodic</label>
     <input type="checkbox" id="periodic" bind:checked={periodic}>
   </div>
+
   {#if periodic}
-  <div class="mb-4">
-    <label for="period">Period:</label>
-    <input type="number"
-      id="period"
-      class="border p-2 w-full"
-      min="1"  
-      bind:value={period}
-    >
-  </div>
+    <div class="mb-4">
+      <label for="period">Period:</label>
+      <input 
+        type="number"
+        id="period"
+        class="border p-2 w-full"
+        min="1"
+        bind:value={period}
+      >
+    </div>
   {/if}
 
-  <button class="p-3 rounded-md w-full bg-purple-500 text-white" on:click={createOrder}>
+  <div class="mb-4">
+    <label for="order-value" class="block mb-2">Order Value (Rupees):</label>
+    <input 
+      type="number"
+      id="order-value"
+      class="border p-2 w-full"
+      bind:value={orderValue}
+      min="0"
+    >
+  </div>
+
+  <button 
+    class="p-3 rounded-md w-full bg-purple-500 text-white" 
+    on:click={createOrder}
+  >
     Create Order
   </button>
+
   <dialog bind:this={myModal1} class="modal">
     <div class="modal-box">
       <h3 class="text-lg font-bold">{message}</h3>

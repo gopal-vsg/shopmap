@@ -51,6 +51,10 @@
           {order.items}
         </p>
         <p class="text-gray-600">
+          <span class="font-semibold">Order Value:</span>
+          ₹{order.order_value?.toLocaleString() || "0"}
+        </p>
+        <p class="text-gray-600">
           <span class="font-semibold">Order Date:</span>
           {order.order_date}
         </p>
