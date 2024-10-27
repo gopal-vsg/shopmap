@@ -39,12 +39,17 @@
       <div class="bg-white shadow-md rounded-lg p-4 group">
         <div class="flex flex-row justify-between items-center mb-2">
           <h2 class="text-xl font-bold">{order.shop?.name || "N/A"}</h2>
-          <button
-            class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded transition duration-300 opacity-0 group-hover:opacity-100"
-            on:click={() => openModal(order)}
-          >
-            Details
-          </button>
+          <div class="flex items-center space-x-2">
+            <span class={order.Last_Delivery_date ? "text-green-600" : "text-yellow-600"}>
+              {order.Last_Delivery_date ? "Delivered" : "Pending"}
+            </span>
+            <button
+              class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded transition duration-300 opacity-0 group-hover:opacity-100"
+              on:click={() => openModal(order)}
+            >
+              Edit Details
+            </button>
+          </div>
         </div>
         <p class="text-gray-600">
           <span class="font-semibold">Items:</span>
@@ -58,18 +63,12 @@
           <span class="font-semibold">Order Date:</span>
           {order.order_date}
         </p>
-        <p class="text-gray-600">
-          <span class="font-semibold">Last Delivery Date:</span>
-          {order.Last_Delivery_date}
-        </p>
-        <p class="text-gray-600">
-          <span class="font-semibold">Periodic:</span>
-          {order.Periodic ? "Yes" : "No"}
-        </p>
-        <p class="text-gray-600">
-          <span class="font-semibold">Period:</span>
-          {order.Period}
-        </p>
+        {#if order.Last_Delivery_date}
+          <p class="text-gray-600">
+            <span class="font-semibold">Delivery Date:</span>
+            {order.Last_Delivery_date}
+          </p>
+        {/if}
       </div>
     {/each}
   </div>

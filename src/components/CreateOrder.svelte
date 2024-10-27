@@ -5,8 +5,6 @@
   let shops = [];
   let selectedShopId = "";
   let items = "";
-  let periodic = false;
-  let period = 0;
   let orderValue = 0;
   let message = "";
   let myModal1;
@@ -27,12 +25,6 @@
       return;
     }
 
-    if (periodic && period <= 0) {
-      message = "Please enter a valid period.";
-      showModal();
-      return;
-    }
-
     if (orderValue <= 0) {
       message = "Please enter a valid order value.";
       showModal();
@@ -43,8 +35,6 @@
       shop_id: selectedShopId,
       items: items,
       order_date: new Date().toISOString(),
-      Periodic: periodic,
-      Period: periodic ? period : null,
       order_value: orderValue,
     };
 
@@ -57,8 +47,6 @@
       message = "Order created successfully!";
       items = "";
       selectedShopId = "";
-      periodic = false;
-      period = 0;
       orderValue = 0;
       location.reload();
     }
@@ -98,24 +86,6 @@
       bind:value={items}
     ></textarea>
   </div>
-
-  <div class="mb-4 flex items-center">
-    <label for="periodic" class="mr-2">Periodic</label>
-    <input type="checkbox" id="periodic" bind:checked={periodic}>
-  </div>
-
-  {#if periodic}
-    <div class="mb-4">
-      <label for="period">Period:</label>
-      <input 
-        type="number"
-        id="period"
-        class="border p-2 w-full"
-        min="1"
-        bind:value={period}
-      >
-    </div>
-  {/if}
 
   <div class="mb-4">
     <label for="order-value" class="block mb-2">Order Value (Rupees):</label>
