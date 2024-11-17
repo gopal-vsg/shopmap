@@ -9,7 +9,7 @@
   async function fetchOrders() {
     const { data: fetchedOrders, error } = await supabase
       .from("orders")
-      .select("*, shop:retailers(name)");
+      .select("*, shop_id:retailers(name)");
     if (error) {
       console.error("Failed to fetch orders", error);
     } else {
@@ -38,7 +38,7 @@
     {#each orders as order}
       <div class="bg-white shadow-md rounded-lg p-4 group">
         <div class="flex flex-row justify-between items-center mb-2">
-          <h2 class="text-xl font-bold">{order.shop?.name || "N/A"}</h2>
+          <h2 class="text-xl font-bold">{order.shop_id?.name || "N/A"}</h2>
           <div class="flex items-center space-x-2">
             <span class={order.Last_Delivery_date ? "text-green-600" : "text-yellow-600"}>
               {order.Last_Delivery_date ? "Delivered" : "Pending"}

@@ -9,7 +9,7 @@
   // Initialize in edit mode directly with the order details (removed periodic)
   let editedOrder = { 
     ...order, 
-    shop_name: order.shop?.name || "N/A",
+    shop_name: order.shop_id?.name || "N/A",
     status: order.Last_Delivery_date ? "Delivered" : "Pending",
     delivery_date: order.Last_Delivery_date || new Date().toISOString().split('T')[0]
   };
@@ -40,7 +40,7 @@
         const { data: shopData, error: shopError } = await supabase
           .from("retailers")
           .update({ name: editedOrder.shop_name })
-          .eq("id", order.shop?.id);
+          .eq("id", order.shop_id?.id);
 
         if (shopError) {
           console.error("Failed to update shop name", shopError);
