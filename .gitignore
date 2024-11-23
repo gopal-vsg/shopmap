@@ -1,3 +1,16 @@
+# Dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# Build outputs
+/build
+/dist
+/dist-ssr
+/.svelte-kit
+/package
+*.local
+
 # Logs
 logs
 *.log
@@ -7,14 +20,16 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-*.local
+# Environment variables
+.env
+.env.*
+!.env.example
 
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/settings.json
 .idea
 .DS_Store
 *.suo
@@ -23,3 +38,11 @@ dist-ssr
 *.sln
 *.sw?
 .vercel
+
+# Testing
+/coverage
+.nyc_output
+
+# Misc
+.DS_Store
+*.pem
